@@ -1,5 +1,8 @@
 # nestjs-reactjs-graphql-typescript-boilerplate-example
 
+## Prerequisite
+Node.js >= 14.0 on your machine.
+
 ## Install Packages
 ```
 cd nest-graphql-ts && yarn
@@ -17,6 +20,11 @@ For nest.js
 ```
 yarn start:dev
 ```
+
+## How to configure database
+Check out [this file](https://github.com/kezoo/nestjs-reactjs-graphql-typescript-boilerplate-example/blob/main/nest-graphql-ts/config/default.yml), there is a 'db' section, configure database there.
+
+On the frontend side, you might need to change the server address to yours, take a look at [this file](https://github.com/kezoo/nestjs-reactjs-graphql-typescript-boilerplate-example/blob/aee31332f474e71170c37400282d362e97c8ec72/react-graphql-ts/src/config/api.config.ts#L16), I think it's crystal clear where you can make the change.
 
 ## Pager module
 There is an independent [Pager module](https://github.com/kezoo/nestjs-reactjs-graphql-typescript-boilerplate-example/tree/main/nest-graphql-ts/src/modules/_common/pagination) inside the nest project, which supports both offset pagination and cursor pagination.
