@@ -22,7 +22,7 @@ yarn start:dev
 ```
 
 ## How to configure database
-Check out [this file](https://github.com/kezoo/nestjs-reactjs-graphql-typescript-boilerplate-example/blob/main/nest-graphql-ts/config/default.yml), there is a 'db' section, configure database there.
+Check out [this file](https://github.com/kezoo/nestjs-reactjs-graphql-typescript-boilerplate-example/blob/71ae27d646dd240c4b6de1d16313042a067ec2a7/nest-graphql-ts/config/default.yml#L6-L11), there is a 'db' section, configure database there.
 
 On the frontend side, you might need to change the server address to yours, take a look at [this file](https://github.com/kezoo/nestjs-reactjs-graphql-typescript-boilerplate-example/blob/aee31332f474e71170c37400282d362e97c8ec72/react-graphql-ts/src/config/api.config.ts#L16), I think it's crystal clear where you can make the change.
 
