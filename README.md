@@ -12,7 +12,7 @@ cd react-graphql-ts && yarn
 ## Start Server
 Make sure your terminal is in the respective directory.
 
-For front-end
+For React
 ```
 yarn start
 ```
@@ -29,7 +29,7 @@ On the frontend side, you might need to change the server address to yours, take
 ## Pager module
 There is an independent [Pager module](https://github.com/kezoo/nestjs-reactjs-graphql-typescript-boilerplate-example/tree/main/nest-graphql-ts/src/modules/_common/pagination) inside the nest project, which supports both offset pagination and cursor pagination.
 
-At the moment there are only a few articles on the internet talking about how to make cursor-based pagination work with nest.js suite, but they all seem to have some bugs or incompletions for me, especially when you are trying to do a query in need of sorting and order, So I decided to write my own pagination under the hood of Nest, now here it is, this might be the only working cursor & offset pagination that supports sorting and order and Nest. 
+At the moment there are only a few articles on the internet talking about how to make cursor-based pagination work with nest.js suite, but they all seem to have some bugs or incompletions for me, especially when you are trying to do a query in need of sorting and order, So I decided to write my own pagination under the hood of Nest, now here it is, this might be the only working cursor & offset pagination online that supports sorting and order and Nest. 
 
 Another thing is that I can't get TypeORM work with some complex query conditions, I mean like there are many where clauses and orWhere clauses at the same time, I tried a lot, but the final output is just not right, so I replaced it with Knex.
 
