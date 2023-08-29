@@ -16,7 +16,7 @@ For front-end
 ```
 yarn start
 ```
-For nest.js
+For Nest
 ```
 yarn start:dev
 ```
