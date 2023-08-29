@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fafafa;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+*.unselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  /*
+    Introduced in Internet Explorer 10.
+    See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+  */
+  -ms-user-select: none;
+  user-select: none;
+}
+.hidden {
+  display: none !important;
+}
+
+.flex-all,
+.flex-all * {
+  display: flex;
+} 
+.noticeable-header-h {
+  background-color: #1a65c6;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  justify-self: flex-start;
+  padding: 0.6rem 0;
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+.common-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.light-borderColor {
+  border-color: #dfdfdf !important;
+}
+.flex-direction-column {
+  flex-direction: column;
+}
+.cursorPointer {
+  cursor: pointer;
+}
+.gp-tip.gp-notAvaialble {
+  font-style: italic;
+}
+.gp-grayColorB0,
+.gp-notAvaialble {
+  color: #b0b0b0;
+}
+.gp-smallFontSize {
+  font-size: 0.9rem;
+}
+.gp-lightBlue {
+  color: #529af7;
+}
+.gp-boxShadow-card {
+  box-shadow: 1px 1px 11px 2px rgb(0,0,0,0.13);
+}
+.highlight {
+  color: #ff9900
+}
+.zIndex-starter {
+  z-index: 100;
+}
+.zIndex-inter {
+  z-index: 200;
+}
+.zIndex-senior {
+  z-index: 300;
+}
+.zIndex-super {
+  z-index: 1000;
+}

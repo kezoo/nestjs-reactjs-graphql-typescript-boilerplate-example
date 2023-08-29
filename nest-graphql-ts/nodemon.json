@@ -1,0 +1,6 @@
+{
+  "watch": ["src","config"],
+  "ext": "ts,js,yml",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "ts-node -r tsconfig-paths/register src/.bin/main.ts"
+}

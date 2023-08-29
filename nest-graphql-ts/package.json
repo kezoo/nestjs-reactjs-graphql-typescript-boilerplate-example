@@ -1,0 +1,45 @@
+{
+  "name": "nest-graphql-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "jh",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon",
+    "typeorm:migrate": "node --require ts-node/register ./node_modules/typeorm/cli.js migration:run -d src/config/dbSource.config.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.7.5",
+    "@nestjs/apollo": "^10.0.14",
+    "@nestjs/common": "^9.4.3",
+    "@nestjs/config": "^3.0.0",
+    "@nestjs/core": "^9.4.3",
+    "@nestjs/graphql": "^10.0.21",
+    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/typeorm": "^10.0.0",
+    "apollo-server-express": "^3.8.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "config": "^3.3.9",
+    "graphql": "^16.5.0",
+    "knex": "^2.4.2",
+    "mysql2": "3.2.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1",
+    "typeorm": "^0.3.17"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^8.0.0",
+    "@nestjs/schematics": "^8.0.0",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.43.0",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.3"
+  }
+}

@@ -1,0 +1,13 @@
+.TodoPage-list {
+  flex-direction: column;
+}
+.TodoPage-item-title .GC-input.gp-sy-disabled {
+  background-color: transparent;
+}
+.TodoPage-item-title .GC-input-wrapper {
+  border-width: 0;
+  cursor: pointer;
+}
+.TodoPage-item-title .GC-input-wrapper.TodoPage-item-editable {
+  border-width: 1px;
+}

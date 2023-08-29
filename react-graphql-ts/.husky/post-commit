@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+CURTAG=`git describe --abbrev=0 --tags --always`;
+CURTAG="${CURTAG/v/}"
+
+IFS='.' read -a vers <<< "$CURTAG"
+
+MAJ=${vers[0]}
+MIN=${vers[1]}
+FIN=${vers[2]}
+echo "Current Tag: v$MAJ.$MIN.$FIN"
+echo "Current Division: $MAJ $MIN $FIN"
+
+bump_version () {
+  if (($FIN >= 20))
+  then
+    FIN=0
+    ((MIN = MIN+1))
+  else
+    ((FIN = FIN+1))
+  fi
+
+  if (($MIN >= 20))
+  then
+    MIN=0
+    FIN=0
+    ((MAJ = MAJ+1))
+  fi
+
+  NTAG="v$MAJ.$MIN.$FIN"
+  echo "bump_version $MAJ-$MIN-$FIN TAG: $NTAG"
+  if [ $(git tag -l "$NTAG") ]; then
+    echo "$NTAG already exists ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    bump_version
+  else
+    echo "$NTAG is SAFE to add -------------------------------"
+  fi
+}
+bump_version
+
+NEWTAG="v$MAJ.$MIN.$FIN"
+echo "Adding Tag - $NEWTAG";
+
+git tag $NEWTAG
+git push --tags
+echo "Push NewTag: $NEWTAG"
+exit 0;

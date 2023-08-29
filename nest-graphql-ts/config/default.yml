@@ -1,0 +1,11 @@
+app:
+  name: nest-graphql-ts
+  version: 0.0.1
+server:
+  port: 8123
+db:
+  host: localhost
+  port: 3306
+  username: root
+  password: root=pass
+  name: nest_graphql

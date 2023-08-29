@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Task {
+  id: ID!
+  title: String!
+  completed: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type PageInfo {
+  startCursor: String
+  endCursor: String
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  countBefore: Float!
+  countNext: Float!
+  countCurrent: Float!
+  countTotal: Float!
+}
+
+type TaskEdge {
+  cursor: String!
+  node: Task!
+}
+
+type PaginatedTodos {
+  edges: [TaskEdge!]
+  nodes: [Task!]
+  pageInfo: PageInfo
+}
+
+type Query {
+  sayHello: String!
+  todo(id: ID!): Task!
+  todos: [Task!]!
+  todoListWithPagination(limit: Int, pageNo: Int, avoidCursorBased: Boolean, after: String, before: String, sortOrderBy: String, sortingItemsStr: String, sortingItems: [PaginationSorting!]): PaginatedTodos!
+}
+
+input PaginationSorting {
+  sortByKey: String
+  sortDirection: String
+  isDateKey: Boolean
+  noMoreDateTypeComparing: Boolean
+  null: String
+}
+
+type Mutation {
+  addTodo(title: String!): Task!
+  updateTodo(id: ID!, updateTaskInput: UpdateTaskInput!): Task!
+  removeTodo(id: ID!): Task!
+}
+
+input UpdateTaskInput {
+  title: String
+  completed: Boolean
+}
