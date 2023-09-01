@@ -1,13 +1,11 @@
-import { connectRouter } from 'connected-react-router'
 import { combineReducers } from 'redux'
+import baseReducer from './reducers/baseReducer/base.reducer'
 
 interface ConfigureReducerProps {
-  history: any
 }
-export default function configureReducer({ history }: ConfigureReducerProps) {
+export default function configureReducer({ }: ConfigureReducerProps) {
   const reducer = combineReducers({
-    router: connectRouter(history),
-    // user: userReducer,
+    base: baseReducer,
   })
   return reducer
 }

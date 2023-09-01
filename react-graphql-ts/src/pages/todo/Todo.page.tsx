@@ -1,5 +1,5 @@
 import { CheckOutlined, CloseOutlined, DeleteOutlined } from '@ant-design/icons'
-import { Button, Input, Switch, Table, message } from "antd"
+import { Button, ConfigProvider, Input, Switch, Table, message } from "antd"
 import { ColumnsType } from "antd/lib/table"
 import { useEffect, useState } from "react"
 import { SortOptions } from "../../interface/app.interface"
@@ -10,6 +10,7 @@ import { ObjectAnyProp, ReqTodoListParams, TodoItem, TodoPageRef, TodoPageState,
 import { TodoQueryBuilder } from "./Todo.querybuilder"
 
 export default function TodoPage () {
+
   const stateDef: TodoPageState = {
     input: '',
     listWidth: 0,
@@ -217,7 +218,7 @@ export default function TodoPage () {
             disabled={item.completed === true}
             ref={ref => ref && item.id && (todoPageRef.current.itemsRefs[item.id] = ref)}
             onBlur={() => onChangeEditableField({item, doBlur: true, titleChanged: item.titleChanged})}
-            onChange={(e) => onChangeEditableField({item, titleChanged: e.target.value})}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeEditableField({item, titleChanged: e.target.value})}
 
           />
         </div>
@@ -243,10 +244,10 @@ export default function TodoPage () {
       sorter: true,
       render: (value, item) => <Switch
         checkedChildren={
-          <CheckOutlined rev={null} />
+          <CheckOutlined />
         }
         unCheckedChildren={
-          <CloseOutlined rev={null} />
+          <CloseOutlined />
         }
         checked={item.completed}
         onChange={(checked) => {
@@ -277,12 +278,12 @@ export default function TodoPage () {
               })
             }}
             size={18}
-            rev={null}
           />
         </div>
       )
     },
   ]
+  // return (<div />)
   return (
     <div
       className='TodoPage-root'
@@ -290,6 +291,18 @@ export default function TodoPage () {
         flexDirection: 'column',
       }}
     >
+      <ConfigProvider
+    theme={{
+      token: {
+        // Seed Token
+        colorPrimary: '#00b96b',
+        borderRadius: 2,
+
+        // Alias Token
+        colorBgContainer: '#f6ffed',
+      },
+    }}
+  >
       <div
         style={{
           alignItems: 'center',
@@ -300,7 +313,7 @@ export default function TodoPage () {
       >
         <Input
           value={state.input}
-          onChange={(e) => setState({...state, input: e.target.value})}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setState({...state, input: e.target.value})}
         />
         <Button
           onClick={() => {
@@ -397,6 +410,7 @@ export default function TodoPage () {
 
         />
       </div>
+      </ConfigProvider>
     </div>
   )
 }

@@ -2,7 +2,6 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client"
 import { getApiConf } from "../config/api.config"
 import { APP_CONS } from "../constants/general.constant"
 import { DataForGraphqlQueryHandleResult, SendGraphqlQueryParams, SendGraphqlQueryQueryTypeItems } from "../interface/app.interface"
-import { ObjectAnyProp } from "../pages/todo/Todo.interface"
 
 export function initApolloClient () {
   const client = APP_CONS.apolloClient = new ApolloClient({
@@ -19,11 +18,11 @@ export function sendGraphqlQuery (params: SendGraphqlQueryParams) {
   const queryTypeItems: SendGraphqlQueryQueryTypeItems = {
     query: {
       name: 'query',
-      method: APP_CONS.apolloClient?.query,
+      method: APP_CONS.apolloClient && APP_CONS.apolloClient.query,
     },
     mutation: {
       name: 'mutation',
-      method: APP_CONS.apolloClient?.mutate,
+      method: APP_CONS.apolloClient && APP_CONS.apolloClient.mutate,
     }
   }
   const queryTypeItem = queryTypeItems[queryType]
@@ -37,7 +36,7 @@ export function sendGraphqlQuery (params: SendGraphqlQueryParams) {
     queryTypeItem.method({
       [queryTypeItem.name]: gql`${finalQueryStr}`
     })
-      .then((res: ObjectAnyProp) => {
+      .then((res: any) => {
         console.log(`sendGraphqlQuery `, res)
         const rRes: DataForGraphqlQueryHandleResult = {
           data: {},
@@ -64,4 +63,3 @@ export function sendGraphqlQuery (params: SendGraphqlQueryParams) {
       })
   }
 }
-
