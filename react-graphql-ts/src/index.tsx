@@ -40,16 +40,3 @@ function App () {
     </Provider>
   )
 }
-/* function App () {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <ApolloProvider client={initApolloClient()}>
-          <Header />
-          <RouteWrapper />
-          <Footer />
-        </ApolloProvider>
-      </BrowserRouter>
-    </Provider>
-  )
-} */
