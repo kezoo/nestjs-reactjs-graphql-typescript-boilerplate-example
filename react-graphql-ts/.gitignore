@@ -23,4 +23,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 yarn.lock*
-/src/config/private.config.js
+package-lock*
+private.config.js*

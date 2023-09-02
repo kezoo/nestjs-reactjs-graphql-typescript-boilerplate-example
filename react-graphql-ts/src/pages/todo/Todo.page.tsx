@@ -1,5 +1,5 @@
 import { CheckOutlined, CloseOutlined, DeleteOutlined } from '@ant-design/icons'
-import { Button, ConfigProvider, Input, Switch, Table, message } from "antd"
+import { Button, Input, Switch, Table, message } from "antd"
 import { ColumnsType } from "antd/lib/table"
 import { useEffect, useState } from "react"
 import { SortOptions } from "../../interface/app.interface"
@@ -8,6 +8,7 @@ import { deepClone, isBoolean, isString } from "../../utils/base.helper"
 import './Todo.css'
 import { ObjectAnyProp, ReqTodoListParams, TodoItem, TodoPageRef, TodoPageState, TodoQueryBuilderParams } from "./Todo.interface"
 import { TodoQueryBuilder } from "./Todo.querybuilder"
+
 
 export default function TodoPage () {
 
@@ -186,7 +187,6 @@ export default function TodoPage () {
         id: oItem.id, upTitle: oItem.titleChanged,
       })
     }
-
   }
   const upTodo = (oParams: TodoQueryBuilderParams) => sendGraphqlQuery({
     queryType: 'mutation',
@@ -291,18 +291,6 @@ export default function TodoPage () {
         flexDirection: 'column',
       }}
     >
-      <ConfigProvider
-    theme={{
-      token: {
-        // Seed Token
-        colorPrimary: '#00b96b',
-        borderRadius: 2,
-
-        // Alias Token
-        colorBgContainer: '#f6ffed',
-      },
-    }}
-  >
       <div
         style={{
           alignItems: 'center',
@@ -316,6 +304,7 @@ export default function TodoPage () {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setState({...state, input: e.target.value})}
         />
         <Button
+          type='primary'
           onClick={() => {
             const isEmpty = state.input.trim() === ''
             if (isEmpty) {
@@ -410,7 +399,6 @@ export default function TodoPage () {
 
         />
       </div>
-      </ConfigProvider>
     </div>
   )
 }
