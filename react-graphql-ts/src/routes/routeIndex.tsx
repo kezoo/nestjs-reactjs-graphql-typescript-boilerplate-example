@@ -9,13 +9,10 @@ import { ROUTES_PATH } from './route.constant'
 export function RouteWrapper() {
   const userStore = {}
   const nav = (NAV_REF.nav = useNavigate())
-  const aa: {n?: string} = {}
-  console.log(aa?.n)
   return (
     <Routes>
       <Route path="/" element={<PrivateRoutes {...{ userStore }} />}>
         <Route path={ROUTES_PATH.todo.path} element={<TodoPage />} />
-        <Route path='test' element={<div >aaaaaaaaaa</div>} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
