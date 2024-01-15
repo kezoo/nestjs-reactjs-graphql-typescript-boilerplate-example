@@ -1,5 +1,5 @@
-import { CommonRequestParamForResultHandler, ObjectAnyProp, ResultHandlerWhenUnauthorized, ReturnForRequest, WhenUnauthorizedDataFromApiParams } from "./Interface.restLib"
-import { getValue, isObject, isValueEmpty } from "./Util.restLib"
+import { CommonRequestParamForResultHandler, ObjectAnyProp, ResultHandlerWhenUnauthorized, ReturnForRequest, WhenUnauthorizedDataFromApiParams } from "./restLib.interface"
+import { getValue, isObject, isValueEmpty } from "./restLib.util"
 
 export const UNAUTHORIZED_CODE = 401
 const errMsgs = {

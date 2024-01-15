@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { GET_COMMON_REQUEST_SAGA } from './Constant.restLib'
-import { CommonRequestParams, CommonRequestParamsToAction, MakeSagaActionParams, SagaActionParams } from './Interface.restLib'
+import { GET_COMMON_REQUEST_SAGA } from './restLib.constant'
+import { CommonRequestParams, CommonRequestParamsToAction, MakeSagaActionParams, SagaActionParams } from './restLib.interface'
 import { ApiRequest } from './restRequest'
 
 const apiRequest: any = new ApiRequest()

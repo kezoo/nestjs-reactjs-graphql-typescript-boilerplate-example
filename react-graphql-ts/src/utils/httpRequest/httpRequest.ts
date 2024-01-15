@@ -1,5 +1,5 @@
 import { getDispatch } from "../../createReduxStore"
-import { MakeSagaActionParams } from "./restLib/Interface.restLib"
+import { MakeSagaActionParams } from "./restLib/restLib.interface"
 import { makeSagaAction } from "./restLib/restWithSaga"
 
 

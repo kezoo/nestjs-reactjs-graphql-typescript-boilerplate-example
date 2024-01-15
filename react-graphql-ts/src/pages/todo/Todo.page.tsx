@@ -7,7 +7,7 @@ import { DataForGraphqlQueryHandleResult, SortOptions } from "../../interface/ap
 import { deepClone, isBoolean, isString } from "../../utils/base.helper"
 import { sendRestRequest } from '../../utils/httpRequest/httpRequest'
 import { sendGraphqlQuery } from '../../utils/httpRequest/httpRequestWithGraphql'
-import { ReturnForRequest } from '../../utils/httpRequest/restLib/Interface.restLib'
+import { ReturnForRequest } from '../../utils/httpRequest/restLib/restLib.interface'
 import './Todo.css'
 import { ObjectAnyProp, ReqTodoListParams, TodoItem, TodoPageRef, TodoPageState, TodoQueryBuilderParams } from "./Todo.interface"
 import { TodoQueryBuilder } from "./Todo.querybuilder"

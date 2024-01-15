@@ -1,6 +1,6 @@
 import superagent from 'superagent'
-import { CommonRequestParamsToAction, ObjectAnyProp } from "./Interface.restLib"
-import { parseObjectToUrlParams, validJson } from "./Util.restLib"
+import { CommonRequestParamsToAction, ObjectAnyProp } from "./restLib.interface"
+import { parseObjectToUrlParams, validJson } from "./restLib.util"
 import { resultHandler } from "./restResultHandler"
 
 const methods = ['get', 'post', 'put', 'patch', 'del']

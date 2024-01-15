@@ -1,4 +1,4 @@
-import { ObjectAnyProp } from "./Interface.restLib"
+import { ObjectAnyProp } from "./restLib.interface"
 
 export function validJson(str: any) {
   if (!isString(str)) return false

@@ -3,7 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import configureReducer from './configureReducer'
 import { rootSaga } from './configureRootSaga'
-import { GET_COMMON_REQUEST, GET_COMMON_REQUEST_SAGA } from './utils/httpRequest/restLib/Constant.restLib'
+import { GET_COMMON_REQUEST, GET_COMMON_REQUEST_SAGA } from './utils/httpRequest/restLib/restLib.constant'
 
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,
