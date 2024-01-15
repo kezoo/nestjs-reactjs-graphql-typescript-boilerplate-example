@@ -2,9 +2,12 @@ import { CheckOutlined, CloseOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Button, Input, Switch, Table, message } from "antd"
 import { ColumnsType } from "antd/lib/table"
 import { useEffect, useState } from "react"
-import { SortOptions } from "../../interface/app.interface"
-import { sendGraphqlQuery } from "../../utils/app.helper"
+import { getApiConf } from '../../config/api.config'
+import { DataForGraphqlQueryHandleResult, SortOptions } from "../../interface/app.interface"
 import { deepClone, isBoolean, isString } from "../../utils/base.helper"
+import { sendRestRequest } from '../../utils/httpRequest/httpRequest'
+import { sendGraphqlQuery } from '../../utils/httpRequest/httpRequestWithGraphql'
+import { ReturnForRequest } from '../../utils/httpRequest/restLib/Interface.restLib'
 import './Todo.css'
 import { ObjectAnyProp, ReqTodoListParams, TodoItem, TodoPageRef, TodoPageState, TodoQueryBuilderParams } from "./Todo.interface"
 import { TodoQueryBuilder } from "./Todo.querybuilder"
@@ -19,6 +22,7 @@ export default function TodoPage () {
     sort: {sortByKey: 'updatedAt', sortDirection: 'DESC'},
     page: {limit: 10, offset: 0, pageNo: 1},
     totalTodos: 0,
+    doRequestWithRest: true
   }
   const [state, setState] = useState(stateDef)
   const [listState, setListState] = useState([] as TodoItem[])
@@ -27,6 +31,7 @@ export default function TodoPage () {
       itemsRefs: {}
     }
   }
+  const [messageApi, contextHolder] = message.useMessage()
   const upState = ({
     pageSize, pageNo, doReqList, sort,
   }: {
@@ -79,36 +84,56 @@ export default function TodoPage () {
       pageNo: state.page.pageNo,
       sortingItems,
     }
-    // console.log(`============ pageOptions `, pageOptions, sort, tSort)
-    sendGraphqlQuery({
-      queryString: TodoQueryBuilder('listWithPage', {
-        pageOptions,
-      }).queryString,
-      handleRes: (res) => {
-        const {nodes, pageInfo} = res.data.todoListWithPagination.data
-        const upState = {...state}
+    console.log(`============ pageOptions `, pageOptions, sort, tSort)
+    const handleListRes = (res: DataForGraphqlQueryHandleResult | ReturnForRequest) => {
+      const {nodes, pageInfo} = (res.data?.todoListWithPagination || res).data || {}
+      const upState = {...state}
 
-        if (pageInfo) {
-          if (pageInfo.countTotal && state.totalTodos !== pageInfo.countTotal) {
-            upState.totalTodos = pageInfo.countTotal
+      if (pageInfo) {
+        if (pageInfo.countTotal && state.totalTodos !== pageInfo.countTotal) {
+          upState.totalTodos = pageInfo.countTotal
+        }
+      }
+
+      setState(upState)
+      // console.log(`TODO listWithPage `, res, nodes, pageInfo)
+      const todos: TodoItem[] = nodes || []
+
+      if (doReset) {
+        listState.length = 0;
+      }
+      listState.push(...todos)
+      setTimeout(() => {
+        setListState([...listState])
+      })
+    }
+    state.doRequestWithRest ?
+      sendRestRequest({
+        params: {
+          payload: {
+            method: 'get',
+            apiUrl: getApiConf({}).mainApiHost + '/todos',
+            urlParams: {
+              limit: pageOptions.limit,
+              pageNo: pageOptions.pageNo,
+              sortingItemsStr: JSON.stringify(pageOptions.sortingItems),
+            },
+            handleData(res) {
+              console.log(`GET TODOS rest way: `, res)
+              handleListRes(res)
+            }
           }
         }
-
-        setState(upState)
-        // console.log(`TODO listWithPage `, res, nodes, pageInfo)
-        const todos: TodoItem[] = nodes || []
-
-        if (doReset) {
-          listState.length = 0;
+      }) :
+      sendGraphqlQuery({
+        queryString: TodoQueryBuilder('listWithPage', {
+          pageOptions,
+        }).queryString,
+        handleRes: (res) => {
+          handleListRes(res)
         }
-        listState.push(...todos)
-        setTimeout(() => {
-          setListState([...listState])
-        })
-      }
-    })
+      })
   }
-
   useEffect(() => {
     reqTodoList()
   }, [])
@@ -173,7 +198,7 @@ export default function TodoPage () {
     if (isString(titleChanged)) {
       const isTitleEmpty = titleChanged?.trim() === ''
       if (isTitleEmpty) {
-        message.warning('Title can not be empty')
+        messageApi.open({type: 'warning', content: 'Title cannot be empty'})
       }
       Object.assign(toUp, {
         titleChanged: doBlur ? '' : (isTitleEmpty ? '' : titleChanged),
@@ -273,7 +298,7 @@ export default function TodoPage () {
                 queryString: TodoQueryBuilder('removeTodo', {id: item.id}).queryString,
                 handleRes (res) {
                   onUpTodo({id: item.id, doRemove: true})
-                  message.success('Deleted successfully')
+                  messageApi.open({type: 'success', content: 'Deleted successfully'})
                 }
               })
             }}
@@ -291,6 +316,7 @@ export default function TodoPage () {
         flexDirection: 'column',
       }}
     >
+      {contextHolder}
       <div
         style={{
           alignItems: 'center',
@@ -308,7 +334,7 @@ export default function TodoPage () {
           onClick={() => {
             const isEmpty = state.input.trim() === ''
             if (isEmpty) {
-              return message.warning('Title cannot be empty')
+              return messageApi.open({type: 'warning', content: 'Title cannot be empty'})
             }
             sendGraphqlQuery({
               queryType: 'mutation',
@@ -318,7 +344,7 @@ export default function TodoPage () {
                 setState({...state, input: ''})
                 if (res.data.addTodo && res.data.addTodo.data) {
                   setListState([res.data.addTodo.data, ...listState])
-                  message.success('Added successfully')
+                  messageApi.open({type: 'success', content: 'Added successfully'})
                 }
               }
             })

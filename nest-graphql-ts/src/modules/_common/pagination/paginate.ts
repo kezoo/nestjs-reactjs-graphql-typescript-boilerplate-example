@@ -36,16 +36,16 @@ export async function paginate<T>(
     sortingItems.length = 0
     sortingItems.push(...JSON.parse(sortingItemsStr))
   }
-  // console.log(`sortingItems `, sortingItems)
+  console.log(`sortingItems `, sortingItems)
   // const dateProps = Array.from(new Set(['createdAt', 'created_at', 'updatedAt', 'updated_at', ...addDateProps]))
   const sortOrderBy = handleSortOrderValue(sOrderBy)
   const isCursorBased = !avoidCursorBased && !pageNo && sortingItems.length > 0
-  const actualPageNo = Number.isInteger(pageNo) && pageNo >= 1 ? pageNo : 1
+  const actualPageNo = Number(pageNo) >= 1 && Number(pageNo) || 1
   const pageNoToUse = actualPageNo - 1
   const nLimit = limit ?? pageSize;
   const offset = pageNoToUse * nLimit
   const knexQuery = APP_CONS.knexDb(mainTableName)
-
+  // console.log(`pageNo ${pageNo} actualPageNo ${actualPageNo} pageNoToUse ${pageNoToUse} nLimit ${nLimit} isCursorBased ${isCursorBased} offset ${offset} `,)
   const queryResultBuilder = knexQuery.clone()
   let beforeObject: ObjectAnyProp | null
   let afterObject: ObjectAnyProp | null
@@ -99,8 +99,9 @@ export async function paginate<T>(
 
   const startCursor: T = gotResults ? result[0]: null
   const endCursor: T = gotResults ? result.slice().pop() : null
+
   const totalCount = sortOutKnexCount(await knexQuery.clone().count())
-  // console.log(`totalCount `, totalCount)
+  logger.verbose(`totalCount `, totalCount)
   logger.verbose(`Paginate
     nLimit ${nLimit}
     \n startCursorValue ${startCursor && JSON.stringify(startCursor)}

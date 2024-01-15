@@ -13,7 +13,7 @@ export function getApiConf(p: GetApiConfParams) {
   const { mockingApiUrl } = getPrivateConfig()
   const conf: GetApiConfData = {
     development: {
-      mainApiHost: 'http://192.168.71.6:8123',
+      mainApiHost: 'http://localhost:8123',
     },
     test: {
       mainApiHost: '',

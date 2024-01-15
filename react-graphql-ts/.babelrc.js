@@ -23,7 +23,7 @@ module.exports = (api) => {
     plugins: [
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-proposal-class-properties',
-      '@babel/plugin-proposal-export-namespace-from',
+      '@babel/plugin-transform-export-namespace-from',
       '@babel/plugin-proposal-throw-expressions',
       '@babel/proposal-object-rest-spread',
       // Applies the react-refresh Babel plugin on non-production modes only

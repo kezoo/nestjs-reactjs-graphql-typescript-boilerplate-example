@@ -1,7 +1,7 @@
 require('../lib/initEnvAndConfig')
 
 import { Logger, ValidationPipe } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
+import { HttpAdapterHost, NestFactory } from '@nestjs/core'
 // import * as helmet from 'helmet'
 import { HttpExceptionFilter } from '../filters/http-exception.filter'
 import { TransformInterceptor } from '../interceptors/transform.interceptor'
@@ -22,8 +22,9 @@ class App {
     await initKnex()
 
     const port = this.config.server.port || 3000
-    const app = await NestFactory.create(AppModule)
+    const app = await NestFactory.create(AppModule, {cors: true})
     // app.use(helmet())
+    // const { httpAdapter } = app.get(HttpAdapterHost)
     app
       .useGlobalFilters(
         new HttpExceptionFilter(),

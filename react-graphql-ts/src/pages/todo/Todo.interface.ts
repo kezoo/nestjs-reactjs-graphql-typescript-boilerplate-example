@@ -8,6 +8,7 @@ export interface TodoPageState {
   sort: TodoPageSort
   page: Pagination
   totalTodos: number
+  doRequestWithRest: boolean
 }
 export type TodoPageSort = SortOptions | null
 export interface TodoItem {

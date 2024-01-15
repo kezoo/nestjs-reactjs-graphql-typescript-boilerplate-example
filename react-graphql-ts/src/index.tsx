@@ -10,7 +10,7 @@ import { reduxStore } from './createReduxStore'
 import { RouteWrapper } from './routes/routeIndex'
 import './styles/index.css'
 import { antdThemes } from './theme/antdTheme'
-import { initApolloClient } from './utils/app.helper'
+import { initApolloClient } from './utils/httpRequest/httpRequestWithGraphql'
 
 const domNode = document.getElementById('root') as HTMLElement
 const root = createRoot(domNode);
